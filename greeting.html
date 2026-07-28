@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marriage.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #c82333;
+      --pink: #ff4d6d;
+      --white: #ffffff;
+      --ivory: #fff5f5;
+      --text: #362b2d;
+      --shadow: rgba(200, 35, 51, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--white) 40%, var(--red) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .page-wrap {
+      width: min(1180px, 100%);
+      background: rgba(255,255,255,0.95);
+      border-radius: 30px;
+      box-shadow: 0 32px 80px var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0;
+    }
+
+    .hero {
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,240,241,0.98));
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 4vw, 4.5rem);
+      color: var(--red);
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .hero p.subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      max-width: 520px;
+      line-height: 1.7;
+      color: #5c3b42;
+    }
+
+    .details {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .detail-card {
+      padding: 22px 26px;
+      background: var(--white);
+      border-radius: 24px;
+      border: 1px solid rgba(200, 35, 51, 0.08);
+      box-shadow: 0 18px 40px rgba(224, 99, 119, 0.12);
+    }
+
+    .detail-card strong {
+      display: block;
+      font-size: 0.94rem;
+      margin-bottom: 10px;
+      color: var(--red);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .detail-card span {
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: #2d1f22;
+    }
+
+    .welcome {
+      padding: 32px 32px 36px;
+      background: linear-gradient(135deg, rgba(255,77,109,0.14), rgba(200,35,51,0.08));
+      border-radius: 28px;
+      border: 1px solid rgba(200,35,51,0.12);
+      max-width: 100%;
+    }
+
+    .welcome h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 18px;
+      color: #601924;
+    }
+
+    .welcome p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #4e2f34;
+    }
+
+    .hero-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 40px;
+      font-size: 0.95rem;
+      color: #6b4950;
+    }
+
+    .hero-footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-footer .heart {
+      color: var(--pink);
+      font-size: 1.2rem;
+    }
+
+    .image-panel {
+      position: relative;
+      min-height: 560px;
+      background: url('https://images.unsplash.com/photo-1501451243557-0f14ec3ae818?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .image-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.85));
+    }
+
+    .image-panel .overlay {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255,255,255,0.88);
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 20px 44px rgba(76, 21, 33, 0.15);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .image-panel .overlay h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 14px;
+      font-size: 1.8rem;
+      color: #8a2533;
+    }
+
+    .image-panel .overlay p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #5a3a3d;
+      margin-bottom: 20px;
+    }
+
+    .image-panel .overlay button {
+      border: none;
+      outline: none;
+      background: var(--red);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 14px 30px rgba(200, 35, 51, 0.24);
+    }
+
+    .image-panel .overlay button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(200, 35, 51, 0.32);
+    }
+
+    @media (max-width: 900px) {
+      .page-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .image-panel {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 32px 24px;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .detail-card {
+        padding: 20px;
+      }
+
+      .image-panel .overlay {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-wrap">
+    <section class="hero">
+      <div>
+        <p style="font-size: 0.95rem; letter-spacing: 0.18em; text-transform: uppercase; color: #9c2939; margin-bottom: 22px;">Welcome to marriage.com</p>
+        <h1>Celebrate love in style</h1>
+        <p class="subtitle">A beautiful greeting card page created to share a warm welcome, meaningful details, and a romantic atmosphere for your marriage-style website.</p>
+      </div>
+
+      <div class="details">
+        <article class="detail-card">
+          <strong>Name</strong>
+          <span>Sophia &amp; Liam</span>
+        </article>
+        <article class="detail-card">
+          <strong>Age</strong>
+          <span>28 &amp; 30</span>
+        </article>
+        <article class="detail-card">
+          <strong>City</strong>
+          <span>Paris, New York</span>
+        </article>
+      </div>
+
+      <div class="welcome">
+        <h2>Welcome & Regards</h2>
+        <p>We are so glad you are here. Please join us in celebrating romance, family, and the beginning of a beautiful life together. This page is designed with a stylish red-and-white palette, elegant typography, and a warm, inviting greeting for every visitor.</p>
+      </div>
+
+      <div class="hero-footer">
+        <span class="heart">❤️</span>
+        <span>Love, laughter, and happily ever after.</span>
+      </div>
+    </section>
+
+    <aside class="image-panel">
+      <div class="overlay">
+        <h3>Marriage Stories</h3>
+        <p>Discover elegant ceremony themes, charming wedding inspirations, and heartfelt greetings for your special day.</p>
+        <button>Explore More</button>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>
