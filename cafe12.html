@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cafe 360 — Home</title>
+  <style>
+    :root{
+      --bg:#0f0b08;
+      --accent:#c86b2a;
+      --muted:#b8a79b;
+      --card:#1c1614;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.06);
+      --max-width:1200px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #fff;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(200,120,80,0.06), transparent),
+                  radial-gradient(800px 400px at 90% 90%, rgba(60,40,30,0.04), transparent),
+                  var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter: blur(6px) saturate(1.05);
+      background: linear-gradient(180deg, rgba(15,11,8,0.55), rgba(15,11,8,0.25));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .nav{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 20px;
+    }
+    .logo{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      font-weight:700;
+      letter-spacing:0.6px;
+    }
+    .logo .mark{
+      width:44px;height:44px;border-radius:10px;
+      background: linear-gradient(135deg,var(--accent), #ffb86b);
+      box-shadow: 0 6px 18px rgba(200,100,40,0.18), inset 0 -6px 12px rgba(255,255,255,0.06);
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;
+      transform: rotate(-12deg);
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:18px;
+      font-weight:600;
+      transition: color .18s, transform .18s;
+    }
+    nav a:hover{ color:#fff; transform: translateY(-2px); }
+
+    .container{
+      max-width:var(--max-width);
+      margin: 28px auto;
+      padding: 0 20px 80px;
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 520px;
+      gap:36px;
+      align-items:center;
+      margin-top:20px;
+    }
+    .hero-left{
+      max-width:720px;
+    }
+    .eyebrow{
+      color:var(--accent);
+      font-weight:700;
+      letter-spacing:1px;
+      background: linear-gradient(90deg, rgba(200,120,40,0.12), transparent);
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      margin-bottom:14px;
+    }
+    h1{
+      font-size: clamp(28px, 4vw, 48px);
+      margin:0 0 12px 0;
+      line-height:1.02;
+    }
+    p.lead{
+      color:var(--muted);
+      margin:0 0 18px 0;
+      font-size:16px;
+    }
+    .cta{
+      display:flex;
+      gap:12px;
+      margin-top:14px;
+    }
+    .btn{
+      background: linear-gradient(180deg,var(--accent), #d45a18);
+      border:0;
+      padding:12px 18px;
+      color:#fff;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      box-shadow: 0 8px 30px rgba(200,100,40,0.18);
+    }
+    .btn.ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    /* 3D coffee scene */
+    .hero-right{
+      perspective:1200px;
+      height:420px;
+      position:relative;
+    }
+    .scene{
+      width:100%;
+      height:100%;
+      transform-style:preserve-3d;
+      transition: transform 400ms cubic-bezier(.2,.8,.2,1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .cup{
+      width:300px;
+      height:260px;
+      background: linear-gradient(180deg,#fff,#f6f1ee);
+      border-radius:30% 30% 22% 22% / 26% 26% 18% 18%;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 6px 18px rgba(0,0,0,0.25), inset 0 -12px 30px rgba(0,0,0,0.06);
+      position:relative;
+      transform: translateZ(60px) rotateX(8deg) rotateY(-12deg);
+      overflow:visible;
+    }
+    .cup::before{
+      content:"";
+      position:absolute;
+      left:18px; right:18px; top:18px; bottom:22px;
+      border-radius:inherit;
+      background: radial-gradient(120px 60px at 30% 10%, rgba(255,255,255,0.65), transparent 25%),
+                  linear-gradient(180deg,#4b2b17,#3b2416);
+      z-index:2;
+      transform: translateZ(30px);
+      overflow:hidden;
+    }
+    .steam{
+      position:absolute;
+      left:50%;
+      top:-30px;
+      width:120px;
+      height:160px;
+      transform: translateX(-50%);
+      pointer-events:none;
+    }
+    .steam span{
+      position:absolute;
+      left:50%;
+      width:28px;
+      height:80px;
+      border-radius:50px;
+      transform-origin:center bottom;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.05));
+      opacity:0.12;
+      filter: blur(8px);
+      animation: rise 4s linear infinite;
+    }
+    .steam span:nth-child(1){ left:44%; animation-delay:0s; transform: rotate(-8deg) }
+    .steam span:nth-child(2){ left:50%; animation-delay:0.8s; transform: rotate(6deg) }
+    .steam span:nth-child(3){ left:56%; animation-delay:1.8s; transform: rotate(-4deg) }
+    @keyframes rise{
+      0%{ transform: translateY(30px) scale(0.6); opacity:0.1; }
+      30%{ opacity:0.18; }
+      100%{ transform: translateY(-140px) scale(1.4); opacity:0; }
+    }
+
+    .saucer{
+      position:absolute;
+      width:380px;
+      height:380px;
+      border-radius:50%;
+      left:50%;
+      bottom:-32px;
+      transform: translateX(-50%) translateZ(-30px) scale(0.96);
+      background: radial-gradient(circle at 50% 40%, rgba(200,120,40,0.03), transparent 35%),
+                  linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      z-index:0;
+    }
+
+    /* Menu */
+    .section{
+      margin-top:64px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding:28px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    }
+    .menu-grid{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      padding:24px 6px;
+    }
+
+    .card{
+      width:220px;
+      height:320px;
+      border-radius:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.04);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      transform-style:preserve-3d;
+      transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow .2s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      cursor:grab;
+    }
+    .card img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      display:block;
+    }
+    .card .body{
+      padding:12px;
+      display:flex;
+      gap:8px;
+      flex-direction:column;
+      justify-content:space-between;
+      flex:1;
+    }
+    .card h3{ margin:0; font-size:18px; }
+    .price{ color:var(--accent); font-weight:800; }
+    .card:hover{ transform: translateY(-8px) rotateX(6deg); box-shadow: 0 24px 56px rgba(0,0,0,0.6); }
+
+    /* carousel-like 3D ring (optional) */
+    .ring{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      perspective:1100px;
+      padding:12px 0 20px;
+    }
+
+    /* About / Contact */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+    .card-panel{
+      padding:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .contact-address{
+      color:var(--muted);
+      font-size:15px;
+      margin-top:6px;
+      line-height:1.5;
+    }
+
+    footer{
+      margin-top:46px;
+      padding:26px 0;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{ grid-template-columns: 1fr; }
+      .hero-right{ height:360px; order: -1; margin-bottom:18px; }
+      .two-col{ grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="mark">360</div>
+        <div>
+          <div style="font-size:16px">Cafe 360</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:2px">A warm cup, every time</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About Cafe</a>
+        <a href="#menu">Cafe Menu</a>
+        <a href="#contact">Contact Address</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <div class="eyebrow">Now Serving</div>
+        <h1>Welcome to Cafe 360 — where coffee meets craft</h1>
+        <p class="lead">Hand-poured espresso, slow-brewed care and artisanal treats in the heart of Hassan. Relax in an atmosphere crafted for conversation, creativity and comfort.</p>
+
+        <div class="cta">
+          <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">See Menu</button>
+          <button class="btn ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
+        </div>
+
+        <div style="margin-top:20px; color:var(--muted); font-size:14px;">
+          <strong>Address:</strong> BM Road, Hassan — Open daily 7:30AM–9:30PM
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="scene" id="scene">
+          <div class="cup" aria-hidden="true">
+            <div class="steam" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="saucer" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section" aria-labelledby="menu-heading">
+      <h2 id="menu-heading" style="margin:0 6px 8px 6px">Cafe Menu — Coffee & Favorites</h2>
+      <p style="margin:0 6px 14px 6px; color:var(--muted)">A curated selection — classics and house specialities. Click or hover for a 3D preview.</p>
+
+      <div class="menu-grid" id="menuGrid">
+        <div class="card" data-name="Espresso">
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=60" alt="Espresso">
+          <div class="body">
+            <div>
+              <h3>Espresso</h3>
+              <div style="color:var(--muted); font-size:13px; margin-top:6px">Bold, concentrated shot with velvety crema.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="price">₹70</div>
+              <button class="btn ghost" onclick="order('Espresso')">Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" data-name="Cappuccino">
+          <img src="https://images.unsplash.com/photo-1511920170033-c6a7b53c4f2c?auto=format&fit=crop&w=800&q=60" alt="Cappuccino">
+          <div class="body">
+            <div>
+              <h3>Cappuccino</h3>
+              <div style="color:var(--muted); font-size:13px; margin-top:6px">Espresso, steamed milk and airy foam — a classic.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="price">₹120</div>
+              <button class="btn ghost" onclick="order('Cappuccino')">Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" data-name="Latte">
+          <img src="https://images.unsplash.com/photo-1510627498534-cf7e9002facc?auto=format&fit=crop&w=800&q=60" alt="Latte">
+          <div class="body">
+            <div>
+              <h3>Latte</h3>
+              <div style="color:var(--muted); font-size:13px; margin-top:6px">Smooth microfoam and a gentle espresso base.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="price">₹130</div>
+              <button class="btn ghost" onclick="order('Latte')">Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" data-name="Cold Brew">
+          <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=800&q=60" alt="Cold Brew">
+          <div class="body">
+            <div>
+              <h3>Cold Brew</h3>
+              <div style="color:var(--muted); font-size:13px; margin-top:6px">Slow-steeped for a smooth, chocolatey finish.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="price">₹150</div>
+              <button class="btn ghost" onclick="order('Cold Brew')">Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" data-name="House Special — 360 Blend">
+          <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=60" alt="House Blend">
+          <div class="body">
+            <div>
+              <h3>360 Blend</h3>
+              <div style="color:var(--muted); font-size:13px; margin-top:6px">House roast — balanced, nutty, with caramel notes.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="price">₹140</div>
+              <button class="btn ghost" onclick="order('360 Blend')">Order</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="about" class="section" style="margin-top:28px;">
+      <div class="two-col">
+        <div class="card-panel">
+          <h2 style="margin-top:0">About Cafe 360</h2>
+          <p style="color:var(--muted)">Cafe 360 opened with the belief that a great cup of coffee can lift a whole day. Beans are carefully sourced, roasted in small batches and brewed to order. The interiors blend warm wood, textured tiles and soft lighting for a cozy, modern feel.</p>
+
+          <ul style="color:var(--muted); margin-top:12px; padding-left:18px">
+            <li>Small-batch house roast</li>
+            <li>Local pastries & seasonal menu</li>
+            <li>Free Wi-Fi & comfortable seating</li>
+          </ul>
+        </div>
+
+        <aside class="card-panel">
+          <h3 style="margin-top:0">Visit Us</h3>
+          <div class="contact-address">
+            Cafe 360<br>
+            BM Road, Hassan<br>
+            Karnataka, India<br>
+            <strong style="color:var(--accent)">Open:</strong> 7:30 AM — 9:30 PM daily<br>
+            <strong style="color:var(--accent)">Phone:</strong> +91 98765 43210
+          </div>
+
+          <div style="margin-top:14px">
+            <button class="btn" onclick="openMap()">Open in Maps</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="contact" class="section" style="margin-top:28px;">
+      <h2 style="margin-top:0">Contact Address</h2>
+      <p style="color:var(--muted)">Drop by or send a message — we'd love to hear from you.</p>
+
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;">
+        <form class="card-panel" style="flex:1;min-width:320px" onsubmit="event.preventDefault(); sendMessage()">
+          <label style="display:block;margin-bottom:8px;color:var(--muted)">Your name</label>
+          <input id="name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
+
+          <label style="display:block;margin:12px 0 8px 0;color:var(--muted)">Message</label>
+          <textarea id="message" rows="4" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff"></textarea>
+
+          <div style="margin-top:12px; display:flex; gap:8px;">
+            <button class="btn" type="submit">Send</button>
+            <button class="btn ghost" type="reset">Clear</button>
+          </div>
+        </form>
+
+        <div class="card-panel" style="min-width:280px; max-width:360px;">
+          <h3 style="margin-top:0">Address</h3>
+          <div class="contact-address">
+            BM Road<br>
+            Hassan, Karnataka<br>
+            India
+          </div>
+
+          <div style="margin-top:14px;color:var(--muted);font-size:13px">
+            For bookings or events, contact the store phone number above.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Cafe 360 — BM Road, Hassan. Made with care.
+    </footer>
+  </main>
+
+  <script>
+    // Set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tiny ordering / message handling (demo)
+    function order(item){
+      alert('Added to order: ' + item + '\\n(This is a demo. Contact Cafe to place a real order.)');
+    }
+
+    function sendMessage(){
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name || !message){ alert('Please enter name and message.'); return; }
+      alert('Thanks, ' + name + '! Your message was received. (Demo only)');
+      document.querySelector('form').reset();
+    }
+
+    function openMap(){
+      // Open BM Road, Hassan in Google Maps
+      const url = 'https://www.google.com/maps/search/?api=1&query=BM+Road+Hassan+Karnataka';
+      window.open(url, '_blank');
+    }
+
+    // 3D interactive scene tilt
+    const scene = document.getElementById('scene');
+    document.querySelector('.hero-right').addEventListener('mousemove', (e)=>{
+      const rect = scene.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const dx = (e.clientX - cx) / rect.width;
+      const dy = (e.clientY - cy) / rect.height;
+      scene.style.transform = `rotateX(${dy * 10}deg) rotateY(${dx * 14}deg) translateZ(10px)`;
+    });
+    document.querySelector('.hero-right').addEventListener('mouseleave', ()=>{
+      scene.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    });
+
+    // Simple 3D hover effect on menu cards (tilt)
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('mousemove', (e)=>{
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const rx = (y - 0.5) * -14;
+        const ry = (x - 0.5) * 14;
+        card.style.transform = `translateZ(12px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', ()=> card.style.transform = '');
+      card.addEventListener('mousedown', ()=> card.style.cursor='grabbing');
+      card.addEventListener('mouseup', ()=> card.style.cursor='grab');
+    });
+
+  </script>
+</body>
+</html>
