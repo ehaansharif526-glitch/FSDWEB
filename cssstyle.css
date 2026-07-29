@@ -1,11 +1,11 @@
 :root{
   --accent:#2b76ff;
-  --bg:#f7f9fc;
+  --bg:#ccd19c;
   --text:#1f2937;
   --muted:#6b7280;
   --max-width:1000px;
   --radius:8px;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: system-ui, -apple-system, "goe USeI", Roboto, "Helvetica Neue", Arial;
 }
 
 *{box-sizing:border-box}
