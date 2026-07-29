@@ -1,0 +1,30 @@
+```css
+.main-nav .nav-link,
+a:not(.btn) {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.main-nav .nav-link:hover,
+a:not(.btn):hover {
+  background: rgba(43, 118, 255, 0.08);
+  color: var(--accent);
+  text-shadow: 0 2px 8px rgba(43, 118, 255, 0.25);
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 10px 20px rgba(43, 118, 255, 0.2);
+  transform: translateY(-1px);
+}
+```
